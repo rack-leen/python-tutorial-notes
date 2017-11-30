@@ -1,6 +1,6 @@
-#using python as a calculator //将python做为计算器
-##numbers  //整数
-###numbers1.py 整数运算
+# using python as a calculator //将python做为计算器
+## numbers  //整数
+### numbers1.py 整数运算
 ```
 #!/usr/bin/python3
 # coding=utf-8
@@ -28,7 +28,7 @@ multiplied:5.00
 excpept1.60   #python3现在能让/输出浮点数
 ```
 
-###numbers2.py 运算符的运用和指数
+### numbers2.py 运算符的运用和指数
 ```
 '''
 / % // 运算符的运用和指数
@@ -57,7 +57,7 @@ e = 25
 f = 128
 ```
 
-###numbers3.py 变量运算
+### numbers3.py 变量运算
 ```
 '''
 变量运算
@@ -76,7 +76,7 @@ print("the add : %d\n"%(width*height))
 the add : 900
 ```
 
-###numbers4.py 其他运算
+### numbers4.py 其他运算
 ``````
 #!/usr/bin/python3
 # coding=utf-8
@@ -95,7 +95,7 @@ tax = 0.125000
 c = 12.562500
 ``````
 
-##strings
+## strings
 ``````
 #!/usr/bin/env python
 # coding=utf-8
