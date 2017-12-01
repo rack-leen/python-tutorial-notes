@@ -325,7 +325,7 @@ ValueError: invalid user response
 
 ```
 
-##arg
+##arg //可变参数
 ```
 #!/usr/bin/env python
 # coding=utf-8
@@ -344,7 +344,7 @@ print(f())
 5
 None
 ```
-##f
+##f  //默认参数
 ```
 #!/usr/bin/env python
 # coding=utf-8
@@ -363,4 +363,64 @@ print(f(3))
 [1, 2, 3]
 ```
 
+## keyword arguments //关键字参数
+###parrot
+```
+#!/usr/bin/env python
+# coding=utf-8
+def parrot(voltage,state = 'a stiff',action = 'voom',type = 'Norwegian Blue'):
+    print('--this parrot wouldn\'t',action,end='') #用空格分开
+    print("if you put",voltage,"volts though it.") 
+    print("--lovely plumage , the ",type )
+    print("it's",state , "!")
+
+#实例1
+#print(parrot(1000)) #voltage值为1000，其他使用默认变量
+#实例2
+#print(parrot(voltage=1000))
+#实例3
+#print(parrot(voltage=10000000,action='VOOOOOM'))#输出输入的值
+#实例4
+#print(parrot(action='VOOOOOM',voltage=100000))
+#实例5
+print(parrot('a million','bereft of left', 'jump'))#这三个数据填在parrot的前三个参数位
+#实例6
+parrot('a thousand', state='pushing up the daisies')#将数据一次填入参数位（指定参数除外）
+```
+输出
+```
+--this parrot wouldn't voomif you put 1000 volts though it.
+--lovely plumage , the  Norwegian Blue
+it's a stiff !
+None
+--this parrot wouldn't voomif you put 1000 volts though it.
+--lovely plumage , the  Norwegian Blue
+it's a stiff !
+None
+--this parrot wouldn't VOOOOOMif you put 10000000 volts though it.
+--lovely plumage , the  Norwegian Blue
+it's a stiff !
+None
+--this parrot wouldn't VOOOOOMif you put 100000 volts though it.
+--lovely plumage , the  Norwegian Blue
+it's a stiff !
+None
+--this parrot wouldn't jumpif you put a million volts though it.
+--lovely plumage , the  Norwegian Blue
+it's bereft of left !
+None
+--this parrot wouldn't voomif you put a thousand volts though it.
+--lovely plumage , the  Norwegian Blue
+it's pushing up the daisies !
+```
+
+无效的输入
+```
+parrot()                     # required argument missing
+parrot(voltage=5.0, 'dead')  # non-keyword argument after a keyword argument
+parrot(110, voltage=220)     # duplicate value for the same argument
+parrot(actor='John Cleese')  # unknown keyword argument
+```
+## named keyword parameters //命名关键字参数
+### cheeseshop
 
