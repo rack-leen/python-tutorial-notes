@@ -1,4 +1,15 @@
 # control flow tools //控制流工具
+## if statements
+## for statements
+## range function
+## break , contiune ,else
+## pass statements
+## function argument 
+### position argument //位置参数，普通的参数
+### default argument //默认参数
+### keyword argument //关键字参数，字典形式
+### arbitrary argument lists 
+
 ## if statements //if语句
 ```
 #!/usr/bin/env python
@@ -246,7 +257,7 @@ print(fibnacci2(100))
 ```
 
 ## more on defining function //更多的定义函数
-### default argument values //默认参数值
+### default argument values //默认参数值,只能指向不变对象
 ```
 #!/usr/bin/env python
 # coding=utf-8
@@ -325,7 +336,7 @@ ValueError: invalid user response
 
 ```
 
-##arg //可变参数
+##arg //默认参数
 ```
 #!/usr/bin/env python
 # coding=utf-8
@@ -355,16 +366,64 @@ def f(a , L = []):
 print(f(1))
 print(f(2))
 print(f(3))
+print(f(4,[1,2,3,4]))
+print(f(4,[1,2,3,4]))
+print(f(1))
+print(f(2))
+print(f(3))
 ```
 输出
 ```
 [1]
 [1, 2]
 [1, 2, 3]
+[1, 2, 3, 4, 4]
+[1, 2, 3, 4, 4]
+[1, 2, 3, 1]  #当为默认参数重新赋值，此后的默认参数将会改变
+[1, 2, 3, 1, 2]
+[1, 2, 3, 1, 2, 3]
+```
+### f_example //默认参数
+```
+#!/usr/bin/env python
+# coding=utf-8
+def f_example(L=[]):
+    L.append('END')
+    return L
+print(f_example())
+print(f_example([1,2,3]))
+print(f_example())
+
+```
+输出
+```
+['END'] 
+[1, 2, 3, 'END']  #现在默认参数为END
+['END', 'END']  #第一个为默认参数，后面一个是增加的
+```
+## varied argument //可变参数
+## def-varied
+```
+#!/usr/bin/env python
+# coding=utf-8
+'''
+可变参数
+'''
+def varied(*numbers): #可变参数,可以传入多个参数,*numbers相当于一个元组tuple
+    sum = 0
+    for n in numbers:
+        sum = sum + n*n
+    return sum
+
+print(varied(1,3,4,5))
+```
+输出
+```
+51  #可变参数能同时输入多个参数，组合成元组，进行运算
 ```
 
-## keyword arguments //关键字参数
-###parrot
+## keyword arguments //关键字参数,需要关键字和关键字值形式keyword=value
+### parrot
 ```
 #!/usr/bin/env python
 # coding=utf-8
@@ -375,17 +434,17 @@ def parrot(voltage,state = 'a stiff',action = 'voom',type = 'Norwegian Blue'):
     print("it's",state , "!")
 
 #实例1
-#print(parrot(1000)) #voltage值为1000，其他使用默认变量
+#print(parrot(1000)) #voltage值为1000，其他使用默认变量 位置参数
 #实例2
-#print(parrot(voltage=1000))
+#print(parrot(voltage=1000))  #关键字参数
 #实例3
-#print(parrot(voltage=10000000,action='VOOOOOM'))#输出输入的值
+#print(parrot(voltage=10000000,action='VOOOOOM'))#输出输入的值 1个位置参数，1个关键字参数
 #实例4
-#print(parrot(action='VOOOOOM',voltage=100000))
+#print(parrot(action='VOOOOOM',voltage=100000))#两个关键字参数
 #实例5
-print(parrot('a million','bereft of left', 'jump'))#这三个数据填在parrot的前三个参数位
+print(parrot('a million','bereft of left', 'jump'))#这三个数据填在parrot的前三个参数位，三个位置参数
 #实例6
-parrot('a thousand', state='pushing up the daisies')#将数据一次填入参数位（指定参数除外）
+parrot('a thousand', state='pushing up the daisies')#将数据一次填入参数位（指定参数除外），1个位置参数，1个关键字参数
 ```
 输出
 ```
@@ -421,6 +480,184 @@ parrot(voltage=5.0, 'dead')  # non-keyword argument after a keyword argument
 parrot(110, voltage=220)     # duplicate value for the same argument
 parrot(actor='John Cleese')  # unknown keyword argument
 ```
-## named keyword parameters //命名关键字参数
+## named keyword parameters //命名关键字参数，传入的关键字参数不受限制
 ### cheeseshop
+```
+#!/usr/bin/env python
+# coding=utf-8
+'''
+命名关键字参数
+'''
+def cheeseshop(kind , *arguments , **keywords):#命名关键字参数使得关键字参数传入不受限制
+    print("--Do you have any ",kind , "?")
+    print("--i'm  sorry , we're all out of ",kind)
+    for arg in arguments : #*arguments为可变参数,可以输入多个参数
+        print(arg) #arg将多个参数分别提取出来
+    print("-"*40)
+    for kw in keywords: # **keywords为关键字参数，需要keyword=value组合   
+        print(kw , ":",keywords[kw]) #kw为关键字，keywords[]为值
 
+print(cheeseshop("Limburger","it's very runny,sir","it's really very , very runny ,sir",shopkeeper = "michael Palin",client = "John Cleese",shetch = "Cheese Shop shetch"))
+```
+输出
+```
+--Do you have any  Limburger ?
+--i'm  sorry , we're all out of  Limburger
+it's very runny,sir
+it's really very , very runny ,sir
+----------------------------------------
+shetch : Cheese Shop shetch
+client : John Cleese
+shopkeeper : michael Palin
+None
+```
+
+## arbitrary argument lists //可变参数
+
+### varied
+```
+#!/usr/bin/env python
+# coding=utf-8
+'''
+可变参数
+'''
+def varied(*numbers): #可变参数,可以传入多个参数,*numbers相当于一个元组tuple
+    sum = 0
+    for n in numbers:
+        sum = sum + n*n
+    return sum
+
+print(varied(1,3,4,5))
+```
+输出
+```
+51  #可变参数能同时输入多个参数，组合成元组，进行运算
+```
+
+### concat
+```
+#!/usr/bin/env python3
+# coding=utf-8
+def concat(*args,sep="/"):#可变参数和默认参数
+    return sep.join(args)
+#实例
+print(concat("earth","mars","venus"))#只为可变参数赋值
+print(concat("earth","mars","venus",sep=".")) #可变参数和默认参数
+```
+输出
+```
+earth/mars/venus
+earth.mars.venus
+```
+
+## unpacking argument lists //解出参数列表
+```
+#!/usr/bin/env python
+# coding=utf-8
+'''
+元组
+'''
+a = list(range(3,6))
+print(a) #用list函数将range(3,6)中的参数解压
+
+args = [3,7]
+b = list(range(*args))
+print(b) #用list函数将range中的可变参数解压
+```
+输出
+```
+[3, 4, 5]
+[3, 4, 5, 6]
+```
+
+### parrot
+```
+#!/usr/bin/env python
+# coding=utf-8
+'''
+参数解压
+'''
+
+def parrot(voltage,state='a stiff',action='voom'):
+    print("-- this parrot wouldn't",action,end=' ')
+    print("if you put ",voltage,"volts though it.",end=' ')
+    print("E's ",state,"!")
+d = {"voltage":"four million","state":"bleedin' demised","action":"VOOM"}
+print(parrot(**d)) #传递命名关键字参数，字典
+```
+输出
+```
+-- this parrot wouldn't VOOM if you put  four million volts though it. E's  bleedin' demised !
+None
+```
+
+## lambda expressions //lambda匿名函数
+```
+#!/usr/bin/env python
+# coding=utf-8
+'''
+匿名函数
+'''
+def make(n):
+    return lambda x: x+n #匿名函数设置一个简单的参数，在式中进行简单计算
+#实例
+f=make(42) #这里的43为n值
+
+print(f(39)) #这里的39是x值
+#lambda 用作函数
+#>>> pairs = [(1, 'one'), (2, 'two'), (3, 'three'), (4, 'four')]
+#>>> pairs.sort(key=lambda pair: pair[1])
+#>>> pairs
+#[(4, 'four'), (1, 'one'), (3, 'three'), (2, 'two')]
+```
+输出
+```
+81
+```
+
+## documentation strings //文档字符串，用作说明文档
+### my_function
+```
+#!/usr/bin/env python3
+# coding=utf-8
+'''
+文档字符串，用作说明文档
+'''
+def my_function():
+    """Do nothing , but document it.
+
+    No really , it doesn't do anything
+    """
+    pass 
+
+#实例
+print(my_function.__doc__) #"__"需要两个杠
+```
+输出
+```
+Do nothing , but document it.
+
+    No really , it doesn't do anything
+```
+
+## function annotations //函数注释
+### fn
+```
+#!/usr/bin/env python
+# coding=utf-8
+'''
+函数注释
+'''
+def fn(ham:str,eggs:str='eggs')->str:
+    print("annotations: ",fn.__annotations__)#函数注释所在的隐藏属性
+    print("arguments: ",ham,eggs) #函数参数输出
+    return ham+"and"+eggs
+#实例
+print(fn('spam')) 
+```
+输出
+```
+annotations:  {'return': <class 'str'>, 'ham': <class 'str'>, 'eggs': <class 'str'>}
+arguments:  spam eggs
+spamandeggs
+```
