@@ -183,11 +183,12 @@ print(dir(builtins))
 
 ## packages 包
 + 包必须有\_\_init\_\_.py文件，它用来确定文件目录为包,避免包名被认为是一个字符串.
-例如,有一个包（有\_\_init\_\_.py文件），包下面有三个子目录（都有\_\_init\_\_.py文件，是sound包的子包）
-sound/                          Top-level package    主包
-      \_\_init\_\_.py               Initialize the sound package  确定sound目录是python包
-      formats/                  Subpackage for file format conversions sound包的子包
-              \_\_init\_\_.py           确定formats是包
++ 例如,有一个包（有\_\_init\_\_.py文件），包下面有三个子目录（都有\_\_init\_\_.py文件，是sound包的子包）
+```
+sound/                          Top-level package(主包)
+      __init__.py               Initialize the sound package(确定sound目录是python包) 
+      formats/                  Subpackage for file format conversions(sound包的子包)
+              __init__.py           确定formats是包
               wavread.py
               wavwrite.py
               aiffread.py
@@ -196,34 +197,76 @@ sound/                          Top-level package    主包
               auwrite.py
               ...
       effects/                  Subpackage for sound effects
-              \_\_init\_\_.py
+              __init__.py
               echo.py
               surround.py
               reverse.py
               ...
       filters/                  Subpackage for filters
-              \_\_init\_\_.py
+              __init__.py
               equalizer.py
               vocoder.py
               karaoke.py
-
+```
 ### 导入方法
-+ import sound.effects.echo   导入sound包中的effects子包中的echo模块 隐式导入
++ import sound.effects.echo   隐式导入（导入sound包中的effects子包中的echo模块） 
+
 sound.effects.echo.function() 加载子模块需要引用全名
-+ from sound.effects import echo 从包中导入模块
+
++ from sound.effects import echo 绝对导入（从包中导入模块）
+
 echo.function()              只需要引用模块名，不需要引用全名
-+ from sound.effects.echo import function 从包中模块导入函数 绝对导入
+
++ from sound.effects.echo import function  绝对导入（从包中模块导入函数）
+
 function()                只需要引用函数名
-+ from . import moudle    显示导入（导入同一目录下的模块）
+
+
 
 ## importing * from a package 从一个包中导入所有模块
 + \_\_init\_\_.py中的\_\_all\_\_函数决定应该导入的模块
+
 example,引用sound包，其中的sound/effects/\_\_init\_\_.py文件
-\_\_init\_\_.py
-if \_\_name\_\_ ='\_\_main\_\_'
- all =【"echo","surround","reverse"】 
-表示from sound,effects import \* 时，只导入\_\_ all\_\_ 中的三个模块,\_\_all\_\_ 只影响这种导入模式
+```
+__init__.py
 
+if __name__ ='__main__'
+
+all =["echo","surround","reverse"]  
+
+from sound,effects import *           只导入__ all__ 中的三个模块,__all__ 只影响这种导入模式
+```
 ### intra-package references 
++ relative import 显示导入
+
+from . import moudlename    显示导入（导入同一目录下的模块）
+
+from .. import moudlename
+
+from ..package import moudlename
+
++ 用于python程序的主模块的模块必须用绝对导入（主模块中有“"\_\_main\_\_"）
+
+### packages in multiple directories
++ 使用不同目录下的包，需要使用sys.path添加包目录到当前路径
+```
+import sys
+sys.path.append("引用模块的地址")
+from moudlename import fucntion or import moudlename
+```
 
 
+# conclusion
+
+## 模块导入方法
++ 显示导入
+
+from . import moudlename
+
++ 隐式导入
+
+import moudlename
+
++ 绝对导入
+
+from moudlename/package path import moudlename/function
