@@ -452,4 +452,119 @@ True
 ## looping techniques //循环技术
 + looping through dictionaries //通过字典循环
 + looping through sequence     //通过序列循环
++ loop over more sequence
++ loop over a sequence in reverse
++ loop over a sequence in sorted order
++ loop create a list
 
+```
+#!/usr/bin/env python
+# coding=utf-8
+'''
+用字典循环
+'''
+#looping through dictionaries 
+print("looping through dictionaries:\n")
+knights = {'gallahad':'the pure','robin':'the brave'}
+for k,v in knights.items(): #items()用作显示字典键值
+    print(k,v)
+
+#looping through sequence
+print("looping through sequence:\n")
+for i,n in enumerate(['tic','tac','toe']): #enumerate()函数在字典上是枚举、列举的意思
+    print(i,n)
+
+#loop over more sequence
+print("loop over more sequence:\n")
+questions = ['name','quest','favorite color']
+answers = ['lancelot','the holy grail','blue']
+for q,a in zip(questions,answers): #zip函数接受任意多个序列做为参数，返回一个元组列表
+    print('what is your{0}? it is {1}.'.format(q,a))#format格式化函数用{},:代替传统%
+
+#loop over a sequence in reverse
+print("to loop over a sequence in reverse:\n")
+for i in reversed(range(1,10,2)):#颠倒顺序
+    print(i)
+
+#loop over a sequence in sorted order
+print("loop over a sequence in sorted order\n")
+basket = ['apple','orange','apple','pear','orange','banana']
+for f in sorted(set(basket)):#按照集合排序(用字母顺序排序),set输出不能重复
+    print(f)
+
+#loop create a list
+print("loop create a list :\n")
+import math  #导入数学公式
+raw_data = [56.2,float('NaN'),51.7,55.3,52.5,float('NaN'),47.8]
+filtered_data = [] #创建一个空列表
+for value in raw_data:
+    if not math.isnan(value): #nan is not a number，这一句表示输出是number的
+        filtered_data.append(value)
+print(filtered_data)
+```
+输出
+```
+looping through dictionaries:
+
+robin the brave
+gallahad the pure
+looping through sequence:
+
+0 tic
+1 tac
+2 toe
+loop over more sequence:
+
+what is yourname? it is lancelot.
+what is yourquest? it is the holy grail.
+what is yourfavorite color? it is blue.
+to loop over a sequence in reverse:
+
+9
+7
+5
+3
+1
+loop over a sequence in sorted order
+
+apple
+banana
+orange
+pear
+loop create a list :
+
+[56.2, 51.7, 55.3, 52.5, 47.8]
+```
+
+## more on conditions  更多的条件语句
++ 用在while if语句中
+### 比较类型
++ in and not in 检查一个值是否在序列中
++ is and is not 比较 =两个对象是否相同
++ a小于b连等于c 几个比较可以被链接
++ (A  and (not B)) or C 几个比较可以用布尔操作符联合
+```
+#!/usr/bin/env python
+# coding=utf-8
+'''
+将比较的结果分配给变量
+'''
+string1,string2,string3='','Trondheim','Hammer Dance' #三个变量分别赋值
+non_null = string1 or string2 or string3 #比较三个变量中的数据，并赋值给另一个变量
+print(non_null) 
+```
+输出
+```
+Trondheim
+```
+
+## compparing sequences and other types 序列与其他类型的比较
+```
+(1, 2, 3)              < (1, 2, 4)
+[1, 2, 3]              < [1, 2, 4]
+'ABC' < 'C' < 'Pascal' < 'Python'
+(1, 2, 3, 4)           < (1, 2, 4)
+(1, 2)                 < (1, 2, -1)
+(1, 2, 3)             == (1.0, 2.0, 3.0)
+(1, 2, ('aa', 'ab'))   < (1, 2, ('abc', 'a'), 4)
+```
