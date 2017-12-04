@@ -20,3 +20,12 @@ f = open('workfile1', 'w') #打开文件,并支持写入
 value = ('answer',42) #元组
 s = str(value) #将元组转换为字符串
 f.write(s) #将s写入f文件中，需要有w权限
+
+print('please input:\n')
+f = open('workfile3','rb+') #表示有读取文件，可以追加binary类型数据
+print(f.write(b'0123456789abcdef')) #写入binary类型数据
+print(f.seek(5)) #寻找文件中第六个字节
+print(f.read(1))
+print(f.seek(-3,2))
+print(f.read(1))
+
