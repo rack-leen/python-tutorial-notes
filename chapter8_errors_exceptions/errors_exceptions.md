@@ -173,9 +173,9 @@ NameError: HiThere
 
 ## user-defined exceptions 用户自定义异常
 
-+ 创建异常函数来命名自己的异常
-```
++ 创建异常类来命名自己的异常
 
+```
 #!/usr/bin/env python
 # coding=utf-8
 class Error(Exception):
@@ -214,6 +214,7 @@ class TransitionError(Error):
 ## defining clean-up actions 
 
 + 在所有情况下被定义的清理动作
+
 ```
 >>> try:
 ...     raise KeyboardInterrupt
@@ -225,4 +226,60 @@ KeyboardInterrupt
 Traceback (most recent call last):
   File "<stdin>", line 2, in <module>
 ```
++ try...except...else...finally语句连用
 
+#! /usr/bin/python3
+#-*-coding:utf-8-*-
+
+'''
+try...except...finally语句中使用else
+'''
+
+def divide(x,y):
+    try:
+        result = x/y
+    except ZeroDivisionError:
+        print("division by zero.")
+    else:
+        print("the result is ",result)
+    finally:
+        print("excuting finally clause.")
+
+print(divide(2,1))
+print(divide(2,0))
+print(divide("2","1"))#不能输入字符
+```
+输出
+```
+the result is  2.0
+excuting finally clause.
+None
+division by zero.
+excuting finally clause.
+None
+excuting finally clause.
+Traceback (most recent call last):
+  File "define_clean_up_action_else.py", line 20, in <module>
+    print(divide("2","1"))#不能输入字
+  File "define_clean_up_action_else.py", line 10, in divide
+    result = x/y
+TypeError: unsupported operand type(s) for /: 'str' and 'str'
+```
++ conclusion
+try:后面接正确运行的语句，如果没有异常，则运行
+except:后面接异常类型，自定义异常描述
+finally:不论是否发生异常，都会运行
+else:与其他语句中的用法相同，用在异常语句中，意味着异常不会发生
+raise:异常引发语句
+
+## predefined clean-up actions
+
++ with 语句处理异常
+for line in open("myfile.txt"): 
+print(line, end="")
+这段代码将会打开一个文件，但是不会关闭，这将会产生一个异常
+但是用了with语句
+with open("myfile.txt") as f: 
+for line in f: 
+print(line, end="")
+这将会自动关闭打开的文件。
