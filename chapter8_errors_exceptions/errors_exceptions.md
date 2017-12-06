@@ -112,7 +112,7 @@ for arg in sys.argv[1:]:
         f.close() #关闭文件
 
 ```
-
++ 实例化参数
 ```
 #实例化参数，在添加到异常中
 try :
@@ -227,7 +227,7 @@ Traceback (most recent call last):
   File "<stdin>", line 2, in <module>
 ```
 + try...except...else...finally语句连用
-
+```
 #! /usr/bin/python3
 #-*-coding:utf-8-*-
 
@@ -275,11 +275,16 @@ raise:异常引发语句
 ## predefined clean-up actions
 
 + with 语句处理异常
+```
 for line in open("myfile.txt"): 
-print(line, end="")
-这段代码将会打开一个文件，但是不会关闭，这将会产生一个异常
+  print(line, end="")
+
+#这段代码将会打开一个文件，但是不会关闭，这将会产生一个异常
+```
 但是用了with语句
+```
 with open("myfile.txt") as f: 
-for line in f: 
-print(line, end="")
-这将会自动关闭打开的文件。
+   for line in f: 
+       print(line, end="")
+#这将会自动关闭打开的文件。
+```
