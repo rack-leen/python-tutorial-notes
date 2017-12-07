@@ -442,3 +442,209 @@ class DeriveClassName(Base1,Base2,Base3):
 
 ## private variables 私有变量
 
++ 私有变量与访问限制
+私有变量是只有内部可以访问，外部不能访问。
++ 私有变量形式
+在普通变量之前加上两个下划线，如self.\_\_name，这就是私有变量
+```
+#!/usr/bin/env python
+# -*-coding=utf-8-*-
+'''
+私有变量
+'''
+
+class Mapping:
+    def __init__(self,iterable):
+        self.items_list = []  #相当于在函数中定义的变量
+        self.__update(iterable) #调用方法
+
+    def update(self,iterable):
+        for item in iterable:
+            self.items_list.append(item)
+
+    __update = update #将update方法的副本复制给私有变量
+
+class MappingSubclass(Mapping): #子类
+    def update(self,keys,values):
+        for item in zip(keys,values): #将keys,values组装返回一个元组
+            self.items_list.append(item)
+```
+
+## 其他
++ 类也有c语言中struct数据类型的作用
+```
+#!/usr/bin/env python
+# -*-coding=utf-8-*-
+'''
+将类当做struct数据类型
+'''
+class Emptyclass:
+    pass
+
+join = Emptyclass()
+
+join.name = 'john Doe'
+join.dept = 'computer lab'
+join.salary = '1000'
+
+#实例
+
+print(join.name,"\n",join.dept,"\n",join.salary)
+```
+输出
+```
+john Doe 
+ computer lab 
+ 1000
+```
+## 迭代器
++ for语句用于迭代
+```
++ 用for循环进行迭代
+#!/usr/bin/env python
+# -*-coding=utf-8-*-
+'''
+迭代器，用for进行迭代
+'''
+
+for element in [1,2,3]: #list
+    print(element)
+for element in (1,2,3): #tuple
+    print(element)
+for key in {'one':1,'two':2}: #dictionary
+    print(key)
+for char in "123": #string
+    print(char)
+for line in open("myfile.txt"):
+    print(line)
+```
+输出
+```
+1
+2
+3
+1
+2
+3
+one
+two
+1
+2
+3
+this is a txt .
+```
++  for 语句调用iter()进行迭代
+```
+#!/usr/bin/env python
+# -*-coding=utf-8-*-
+
+s = 'abc'
+it = iter(s) #用于迭代的内建函数
+
+print(it)
+print(next(it)) #next函数表示显示下一个迭代的值
+print(next(it))
+print(next(it))
+print(next(it))
+```
+输出
+```
+<str_iterator object at 0x7ffbce6ae9e8>
+a
+b
+c
+Traceback (most recent call last):
+  File "class_iterator_next.py", line 11, in <module>
+    print(next(it))
+StopIteration       #当迭代对象为空时，则返回错误,停止迭代
+```
+
++ 定义一个iter()方法，返回\_\_next\_\_()方法
+
+```
+#!/usr/bin/env python
+# -*-coding=utf-8-*-
+'''
+定义一个__iter__()方法，用__next__()方法返回一个对象
+'''
+
+class Reverse:
+    def __init__(self,data):
+        self.data = data 
+        self.index = len(data) #返回data长度
+    def __iter_(self):
+        return self        #
+    def __next__(self):
+        if self.index == 0: #数据长度为0则停止迭代
+            raise StopIteration #将引发异常
+        self.index = self.index - 1 #数据长度-1
+        return self.data[self.index] #返回第i个数据
+
+rev = Reverse("spam")
+for char in rev:
+    print(char)
+#不知为什么，不能迭代，输出错误
+```
+
+## generators 生成器
+
++ 生成器是一个简单的用来创建迭代器的工具.与普通函数差不多，但是用yield返回.
+生成器自动创建\_\_iter()\_\_和\_\_next()\_\_方法，生成器实现的函数也可以用迭代器实现。
+```
+#!/usr/bin/env python
+# -*-coding=utf-8-*-
+'''
+生成器，用yield返回
+'''
+
+def reverse(data):
+    for index in range(len(data)-1,-1,-1): #从后面开始循环到开始
+        yield data[index]   #由于是列表，从0开始，需要-1
+
+for char in reverse('golf'):
+    print(char)
+```
+输出
+```
+f
+l
+o
+g
+```
+## generator expressions 生成器表达式
+
++ 是一些简单的生成器被编码为表达式，它使用像列表生成式的语法，但是‘"\[\]"换为"()"
+```
+#!/usr/bin/env python
+# -*-coding=utf-8-*-
+'''
+生成器生成式
+'''
+#求i的平方
+a = sum(i*i for i in range(10))
+print(a)
+
+#两个列表乘积
+xvec = [10,20,30]
+yvec = [7,6,4]
+b = sum(x*x for x,y in zip(xvec,yvec)) #用zip函数将两个列表组装成元组
+print(b)
+
+#
+from math import pi,sin
+sine_table = {x:sin(x*pi/180) for x in range(0,91)}
+unique_words = set(word for line in page for word in line.split())
+vaiedictorian = max((student.gpa,student.name) for student in graduates)
+data = 'golf'
+list(data[i] for i in range(len(data)-1,-1,-1))
+```
+输出
+```
+285
+1400
+Traceback (most recent call last):
+  File "class_generator_expression.py", line 19, in <module>
+    unique_words = set(word for line in page for word in line.split())
+NameError: name 'page' is not defined
+
+```
