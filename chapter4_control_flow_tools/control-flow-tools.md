@@ -1,16 +1,16 @@
-# control flow tools //控制流工具
+# control flow tools  控制流工具
 ## if statements
 ## for statements
 ## range function
 ## break , contiune ,else
 ## pass statements
 ## function argument 
-### position argument //位置参数，普通的参数
-### default argument //默认参数
-### keyword argument //关键字参数，字典形式
+### position argument  位置参数，普通的参数
+### default argument  默认参数
+### keyword argument  关键字参数，字典形式
 ### arbitrary argument lists 
 
-## if statements //if语句
+## if statements  if语句
 ```
 #!/usr/bin/env python
 # coding=utf-8
@@ -41,7 +41,7 @@ single
 
 ```
 
-## for statements //for 语句
+## for statements  for 语句
 ###for-example
 ```
 #!/usr/bin/env python
@@ -77,7 +77,7 @@ for x in words[:]:
 ['windows', 'cat', 'windows', 'linux', 'pig']
 ```
 
-##the range() function //range()函数
+##the range() function  range()函数
 ```
 #!/usr/bin/env python
 # coding=utf-8
@@ -151,7 +151,7 @@ range(0, 10)
 [0, 1, 2, 3, 4]
 ```
 
-## break and contiune statements, and else clauses on loops //循环中的break,contiune,else子句
+## break and contiune statements, and else clauses on loops  循环中的break,contiune,else子句
 ```
 #!/usr/bin/env python
 # coding=utf-8
@@ -195,7 +195,7 @@ found an even number 8
 found a number 9
 ```
 
-## pass statements //pass语句
+## pass statements pass语句
 ### 遇到pass语句,两种情况
 + 语句中，会使程序等待在那里，需要强制断开（ctrl+c）
 + 类中，构造一个空类，适合以后想到东西可以直接在这里补充
@@ -223,7 +223,7 @@ def initlog(*args):
     pass
 ```
 
-## defining function //定义函数
+## defining function 定义函数
 ### fibnacci
 ```
 #!/usr/bin/env python
@@ -256,8 +256,8 @@ print(fibnacci2(100))
 [0, 1, 1, 2, 3, 5, 8, 13, 21, 34, 55, 89]
 ```
 
-## more on defining function //更多的定义函数
-### default argument values //默认参数值,只能指向不变对象
+## more on defining function  更多的定义函数
+### default argument values  默认参数值,只能指向不变对象
 ```
 #!/usr/bin/env python
 # coding=utf-8
@@ -336,7 +336,7 @@ ValueError: invalid user response
 
 ```
 
-##arg //默认参数
+##arg  默认参数
 ```
 #!/usr/bin/env python
 # coding=utf-8
@@ -355,7 +355,7 @@ print(f())
 5
 None
 ```
-##f  //默认参数
+##f   默认参数
 ```
 #!/usr/bin/env python
 # coding=utf-8
@@ -383,7 +383,7 @@ print(f(3))
 [1, 2, 3, 1, 2]
 [1, 2, 3, 1, 2, 3]
 ```
-### f_example //默认参数
+### f_example  默认参数
 ```
 #!/usr/bin/env python
 # coding=utf-8
@@ -401,7 +401,7 @@ print(f_example())
 [1, 2, 3, 'END']  #现在默认参数为END
 ['END', 'END']  #第一个为默认参数，后面一个是增加的
 ```
-## varied argument //可变参数
+## varied argument  可变参数
 ## def-varied
 ```
 #!/usr/bin/env python
@@ -422,7 +422,7 @@ print(varied(1,3,4,5))
 51  #可变参数能同时输入多个参数，组合成元组，进行运算
 ```
 
-## keyword arguments //关键字参数,需要关键字和关键字值形式keyword=value
+## keyword arguments  关键字参数,需要关键字和关键字值形式keyword=value
 ### parrot
 ```
 #!/usr/bin/env python
@@ -480,7 +480,7 @@ parrot(voltage=5.0, 'dead')  # non-keyword argument after a keyword argument
 parrot(110, voltage=220)     # duplicate value for the same argument
 parrot(actor='John Cleese')  # unknown keyword argument
 ```
-## named keyword parameters //命名关键字参数，传入的关键字参数不受限制
+## named keyword parameters  命名关键字参数，传入的关键字参数不受限制
 ### cheeseshop
 ```
 #!/usr/bin/env python
@@ -512,7 +512,7 @@ shopkeeper : michael Palin
 None
 ```
 
-## arbitrary argument lists //可变参数
+## arbitrary argument lists  可变参数
 
 ### varied
 ```
@@ -550,7 +550,7 @@ earth/mars/venus
 earth.mars.venus
 ```
 
-## unpacking argument lists //解出参数列表
+## unpacking argument lists  解出参数列表
 ```
 #!/usr/bin/env python
 # coding=utf-8
@@ -591,7 +591,7 @@ print(parrot(**d)) #传递命名关键字参数，字典
 None
 ```
 
-## lambda expressions //lambda匿名函数
+## lambda expressions  lambda匿名函数
 ```
 #!/usr/bin/env python
 # coding=utf-8
@@ -615,7 +615,7 @@ print(f(39)) #这里的39是x值
 81
 ```
 
-## documentation strings //文档字符串，用作说明文档
+## documentation strings  文档字符串，用作说明文档
 ### my_function
 ```
 #!/usr/bin/env python3
@@ -640,7 +640,7 @@ Do nothing , but document it.
     No really , it doesn't do anything
 ```
 
-## function annotations //函数注释
+## function annotations  函数注释
 ### fn
 ```
 #!/usr/bin/env python
